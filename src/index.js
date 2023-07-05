@@ -13,19 +13,6 @@ fetch(URL)
 
 function handleShows() {
   const imgCard = document.querySelector(".show-cards");
-  const searchInput = document.querySelector("#search-input");
-  const searchButton = document.querySelector(".search-bar button");
-
-  // Add an event listener to the search button
-  searchButton.addEventListener("click", () => {
-    const searchText = searchInput.value.trim().toLowerCase();
-
-    // Filter the data based on the search keywords
-    const filteredData = data.filter((show) =>
-      show.name.toLowerCase().includes(searchText)
-    );
-
-    imgCard.innerHTML = ""; // Clear existing show cards
 
   // Calculate start and end indices based on the current page
   const startIndex = (currentPage - 1) * showsPerPage;
@@ -100,6 +87,93 @@ function handleShows() {
       imgCard.appendChild(card);
     }
   }
+  const searchBtn = document.querySelector("#search-btn");
+  searchBtn.addEventListener("click", fetchResults);
+
+  function fetchResults() {
+    const keyword = document.querySelector("#search-input").value;
+    console.log(keyword);
+    fetch(URL)
+      .then((res) => res.json())
+      .then((data) => {
+        imgCard.innerHTML = ""; // Clear existing show cards
+        const searchResults = data.filter((show) =>
+          show.name.toLowerCase().includes(keyword.toLowerCase())
+        );
+        if (searchResults.length > 0) {
+          searchResults.forEach((show) => {
+            createCard(show);
+          });
+        } else {
+          console.log("No results found for the keyword");
+        }
+      });
+  }
+
+  function createCard(show) {
+    const imgCard = document.querySelector(".show-cards");
+    const imgElement = document.createElement("img");
+    const id = show.id;
+    const name = show.name;
+    const img = show.image.medium;
+    const showStatus = show.status;
+    const avgRating =
+      show.rating && show.rating.average
+        ? show.rating.average.toFixed(1)
+        : "N/A";
+    const endDate = show.ended;
+    const premiered = show.premiered;
+    const summary = show.summary;
+
+    // Create a new card for the show
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    // Create an image element
+    imgElement.src = img;
+    imgElement.alt = "Show Image";
+
+    // Create the card content
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+
+    const title = document.createElement("h2");
+    title.textContent = name;
+
+    const rating = document.createElement("div");
+    rating.classList.add("rating");
+    rating.innerHTML = `
+      <span class="star">&#9733;</span>
+      <span id="rating-value">${avgRating}</span>
+    `;
+
+    // Create a container for the title and rating
+    const titleRatingContainer = document.createElement("div");
+    titleRatingContainer.classList.add("title-rating-container");
+
+    // Append elements to the title rating container
+    titleRatingContainer.appendChild(title);
+    titleRatingContainer.appendChild(rating);
+
+    // Append the title rating container to the card content
+    cardContent.appendChild(titleRatingContainer);
+
+    // Create a paragraph element for the status
+    const status = document.createElement("p");
+    if (showStatus === "Ended") {
+      status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span></p>`;
+    } else {
+      status.innerHTML = `<p>Premiered: ${premiered} <br> Status: Running </p>`;
+    }
+
+    // Append the status paragraph to the card content
+    cardContent.appendChild(status);
+
+    card.appendChild(imgElement);
+    card.appendChild(cardContent);
+
+    imgCard.appendChild(card);
+  }
 }
 
 function createPagination(totalShows) {
@@ -147,3 +221,5 @@ function updatePaginationButtons() {
   );
   currentButton.classList.add("active");
 }
+
+//fetchResults();
