@@ -74,11 +74,11 @@ function handleShows() {
       // Create a paragraph element for the status
       const status = document.createElement("p");
       if (showStatus === "Ended") {
-        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span><br> 
-        Genres: ${genres}</p>`;
+        status.innerHTML = `<p><span style="font-weight: bold;">Premiered:</span> ${premiered} <br> <span style="font-weight: bold;">Status:</span> <span style="color: red;">Ended on ${endDate} </span><br> 
+        <span style="font-weight: bold;">Genres:</span> ${genres}</p>`;
       } else {
-        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: Running <br> 
-        Genres: ${genres} </p>`;
+        status.innerHTML = `<p><span style="font-weight: bold;">Premiered: </span>${premiered} <br> <span style="font-weight: bold;">Status:</span> Running <br> 
+        <span style="font-weight: bold;">Genres:</span> ${genres} </p>`;
       }
 
       // Append the status paragraph to the card content
@@ -141,6 +141,7 @@ function handleShows() {
     const endDate = formatDate(show.ended);
     const premiered = formatDate(show.premiered);
     const summary = show.summary;
+    const genres = show.genres.join(", ");
 
     // Create a new card for the show
     const card = document.createElement("div");
@@ -178,11 +179,11 @@ function handleShows() {
     // Create a paragraph element for the status
     const status = document.createElement("p");
     if (showStatus === "Ended") {
-      status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span><br> 
-      Genres: ${genres}</p>`;
+      status.innerHTML = `<p><span style="font-weight: bold;">Premiered:</span> ${premiered} <br> <span style="font-weight: bold;">Status:</span> <span style="color: red;">Ended on ${endDate} </span><br> 
+      <span style="font-weight: bold;">Genres:</span> ${genres}</p>`;
     } else {
-      status.innerHTML = `<p>Premiered: ${premiered} <br> Status: Running <br> 
-      Genres: ${genres} </p>`;
+      status.innerHTML = `<p><span style="font-weight: bold;">Premiered: </span>${premiered} <br> <span style="font-weight: bold;">Status:</span> Running <br> 
+      <span style="font-weight: bold;">Genres:</span> ${genres} </p>`;
     }
 
     // Append the status paragraph to the card content
