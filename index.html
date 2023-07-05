@@ -4,6 +4,125 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ShowME</title>
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/buttons.css" />
+    <link
+      rel="shortcut icon"
+      href="./resources/movie.png"
+      type="image/x-icon"
+    />
+    <script src="./src/index.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="#">ShowME</a>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            height="24"
+            width="24"
+          >
+            <g id="a">
+              <g style="--c1: 120; --c2: 0; --delay: -0.5s">
+                <path id="b"></path>
+                <path id="c"></path>
+              </g>
+              <g style="--c1: 210; --c2: 60" transform="rotate(180 12 12)">
+                <path id="b"></path>
+                <path id="c"></path>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search..." />
+          <button type="submit">Search</button>
+        </div>
+        <ul>
+          <li><a href="#">Shows</a></li>
+          <li><a href="#">Schedule</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <!-- Show Cards -->
+      <section class="show-cards"></section>
+
+      <section class="filter-section">
+        <div class="filter">
+          <label for="status">Show Status:</label> <br />
+          <select id="status">
+            <option value="">All</option>
+            <option value="running">Running</option>
+            <option value="ended">Ended</option>
+          </select>
+        </div>
+        <div class="filter">
+          <label for="genre">Genre:</label> <br />
+          <select id="genre">
+            <option value="">All</option>
+            <option value="action">Action</option>
+            <option value="drama">Drama</option>
+            <option value="science-fiction">Science-Fiction</option>
+            <option value="romance">Romance</option>
+            <option value="comedy">Comedy</option>
+            <option value="crime">Crime</option>
+            <option value="anime">Anime</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="horror">Horror</option>
+            <option value="history">History</option>
+            <option value="sports">Sports</option>
+            <option value="supernatural">Supernatural</option>
+            <option value="thriller">Thriller</option>
+            <option value="travel">Travel</option>
+            <option value="war">War</option>
+            <option value="western">Western</option>
+            <option value="adult">Adult</option>
+            <option value="adventure">Adventure</option>
+            <option value="music">Music</option>
+            <option value="mystery">Mystery</option>
+            <option value="children">Children</option>
+          </select>
+        </div>
+        <div class="filter">
+          <label for="rating">Rating:</label> <br />
+          <select id="rating">
+            <option value="">All</option>
+            <option value="2+">2+</option>
+            <option value="3+">3+</option>
+            <option value="4+">4+</option>
+            <option value="5+">5+</option>
+            <option value="6+">6+</option>
+            <option value="7+">7+</option>
+            <option value="8+">8+</option>
+            <option value="9+">9+</option>
+          </select>
+        </div>
+        <div class="filter">
+          <label for="sort">Sort By:</label> <br />
+          <select id="sort">
+            <option value="">None</option>
+            <option value="popular">Most Popular</option>
+            <option value="unpopular">Least Popular</option>
+            <option value="highest-rated">Highest Rating</option>
+            <option value="lowest-rated">Lowest Rating</option>
+            <option value="a-to-z">A to Z</option>
+            <option value="z-to-a">Z to A</option>
+          </select>
+        </div>
+        <button id="filter-btn"><span>Filter</span></button>
+      </section>
+    </main>
+    <div class="pagination-reference"></div>
+
+    <footer>
+      <p>&copy; 2023 ShowME. All rights reserved.</p>
+    </footer>
+  </body>
 </html>
