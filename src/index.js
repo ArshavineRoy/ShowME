@@ -32,6 +32,7 @@ function handleShows() {
     const endDate = formatDate(show.ended); // formatting date from 2023-04-07 to July 4, 2023
     const premiered = formatDate(show.premiered);
     const summary = show.summary;
+    const genres = show.genres.join(", "); // Access the "genres" property for each show and join the array elements into a string
     const imgElement = document.createElement("img");
     createCards();
 
@@ -73,9 +74,11 @@ function handleShows() {
       // Create a paragraph element for the status
       const status = document.createElement("p");
       if (showStatus === "Ended") {
-        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span></p>`;
+        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span><br> 
+        Genres: ${genres}</p>`;
       } else {
-        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: Running </p>`;
+        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: Running <br> 
+        Genres: ${genres} </p>`;
       }
 
       // Append the status paragraph to the card content
@@ -175,9 +178,11 @@ function handleShows() {
     // Create a paragraph element for the status
     const status = document.createElement("p");
     if (showStatus === "Ended") {
-      status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span></p>`;
+      status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span><br> 
+      Genres: ${genres}</p>`;
     } else {
-      status.innerHTML = `<p>Premiered: ${premiered} <br> Status: Running </p>`;
+      status.innerHTML = `<p>Premiered: ${premiered} <br> Status: Running <br> 
+      Genres: ${genres} </p>`;
     }
 
     // Append the status paragraph to the card content
