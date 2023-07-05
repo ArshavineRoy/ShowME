@@ -29,8 +29,8 @@ function handleShows() {
       show.rating && show.rating.average
         ? show.rating.average.toFixed(1)
         : "N/A";
-    const endDate = show.ended;
-    const premiered = show.premiered;
+    const endDate = formatDate(show.ended); // formatting date from 2023-04-07 to July 4, 2023
+    const premiered = formatDate(show.premiered);
     const summary = show.summary;
     const imgElement = document.createElement("img");
     createCards();
@@ -135,8 +135,8 @@ function handleShows() {
       show.rating && show.rating.average
         ? show.rating.average.toFixed(1)
         : "N/A";
-    const endDate = show.ended;
-    const premiered = show.premiered;
+    const endDate = formatDate(show.ended);
+    const premiered = formatDate(show.premiered);
     const summary = show.summary;
 
     // Create a new card for the show
@@ -236,4 +236,37 @@ function updatePaginationButtons() {
   currentButton.classList.add("active");
 }
 
-//fetchResults();
+// function to format date into July 4, 2023 format
+function formatDate(dateString) {
+  if (!dateString) {
+    return ""; // Return an empty string if the input date is null or undefined
+  }
+
+  const dateParts = dateString.split("-");
+  const year = dateParts[0];
+  const month = getMonthName(parseInt(dateParts[1], 10));
+  const day = parseInt(dateParts[2], 10);
+
+  return `${month} ${day}, ${year}`;
+}
+
+function getMonthName(monthNumber) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return months[monthNumber - 1];
+}
+
+//console.log(formatDate("2016-04-15"));
