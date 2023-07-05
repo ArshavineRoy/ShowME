@@ -16,6 +16,17 @@ function handleShows() {
   const searchInput = document.querySelector("#search-input");
   const searchButton = document.querySelector(".search-bar button");
 
+  // Add an event listener to the search button
+  searchButton.addEventListener("click", () => {
+    const searchText = searchInput.value.trim().toLowerCase();
+
+    // Filter the data based on the search keywords
+    const filteredData = data.filter((show) =>
+      show.name.toLowerCase().includes(searchText)
+    );
+
+    imgCard.innerHTML = ""; // Clear existing show cards
+
   // Calculate start and end indices based on the current page
   const startIndex = (currentPage - 1) * showsPerPage;
   const endIndex = startIndex + showsPerPage;
