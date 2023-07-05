@@ -13,6 +13,8 @@ fetch(URL)
 
 function handleShows() {
   const imgCard = document.querySelector(".show-cards");
+  const searchInput = document.querySelector("#search-input");
+  const searchButton = document.querySelector(".search-bar button");
 
   // Calculate start and end indices based on the current page
   const startIndex = (currentPage - 1) * showsPerPage;
