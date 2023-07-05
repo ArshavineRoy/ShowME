@@ -105,9 +105,23 @@ function handleShows() {
             createCard(show);
           });
         } else {
-          console.log("No results found for the keyword");
+          imgCard.innerHTML = "<h1>No results found.</h1>";
+          console.log("No results found");
         }
       });
+  }
+
+  /* event listener for the "Enter" key press if the user enters a
+ keyword and presses the Enter key
+ */
+
+  const searchInput = document.querySelector("#search-input");
+  searchInput.addEventListener("keypress", handleKeyPress);
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      fetchResults();
+    }
   }
 
   function createCard(show) {
