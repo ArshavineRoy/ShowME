@@ -89,6 +89,59 @@ function handleShows() {
 
       imgCard.appendChild(card);
     }
+    imgElement.addEventListener("click", () => {
+      console.log("Image Clicked");
+      imgCard.innerHTML = "";
+      // Create a new card for each show
+      const card = document.createElement("div");
+      card.classList.add("card");
+
+      // Create an image element
+      const imgElement = document.createElement("img");
+      imgElement.src = img;
+      imgElement.alt = "Show Image";
+
+      // Create the card content
+      const cardContent = document.createElement("div");
+      cardContent.classList.add("card-content");
+
+      const title = document.createElement("h2");
+      title.textContent = name;
+
+      const rating = document.createElement("div");
+      rating.classList.add("rating");
+      rating.innerHTML = `
+      <span class="star">&#9733;</span>
+      <span id="rating-value">${avgRating}</span>
+    `;
+
+      // Create a container for the title and rating
+      const titleRatingContainer = document.createElement("div");
+      titleRatingContainer.classList.add("title-rating-container");
+
+      // Append elements to the title rating container
+      titleRatingContainer.appendChild(title);
+      titleRatingContainer.appendChild(rating);
+
+      // Append the title rating container to the card content
+      cardContent.appendChild(titleRatingContainer);
+
+      // Create a paragraph element for the status
+      const status = document.createElement("p");
+      if (showStatus === "Ended") {
+        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span> <br> <br> ${summary}</p>`;
+      } else {
+        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: Running </p>`;
+      }
+
+      // Append the status paragraph to the card content
+      cardContent.appendChild(status);
+
+      card.appendChild(imgElement);
+      card.appendChild(cardContent);
+
+      imgCard.appendChild(card);
+    });
   }
   const searchBtn = document.querySelector("#search-btn");
   searchBtn.addEventListener("click", fetchResults);
