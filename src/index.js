@@ -119,6 +119,7 @@ function handleShows() {
     const statusFilter = document.querySelector("#status").value;
     const genreFilter = document.querySelector("#genre").value;
     const ratingFilter = document.querySelector("#rating").value;
+    const sortFilter = document.querySelector("#sort").value;
 
     fetch(URL)
       .then((res) => res.json())
@@ -154,6 +155,21 @@ function handleShows() {
         };
 
         const searchResults = data.filter(filterData);
+
+        // Sorting logic
+        if (sortFilter === "popular") {
+          searchResults.sort((a, b) => {
+            const ratingA = a.rating && a.rating.average ? a.rating.average : 0;
+            const ratingB = b.rating && b.rating.average ? b.rating.average : 0;
+            return ratingB - ratingA; // Sort in descending order of ratings
+          });
+        } else if (sortFilter === "unpopular") {
+          searchResults.sort((a, b) => {
+            const ratingA = a.rating && a.rating.average ? a.rating.average : 0;
+            const ratingB = b.rating && b.rating.average ? b.rating.average : 0;
+            return ratingA - ratingB; // Sort in ascending order of ratings
+          });
+        }
 
         if (searchResults.length > 0) {
           let hasResults = false;

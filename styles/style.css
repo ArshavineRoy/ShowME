@@ -92,10 +92,20 @@ nav ul li a {
   font-weight: 300;
 }
 
+#results {
+  font-family: "open sans", sans-serif;
+  font-size: 25px;
+  font-weight: 300;
+}
+
 /* .popular {
   padding-left: 40px;
   padding-top: 20px;
 } */
+
+main {
+  min-height: 85vh;
+}
 
 #show-content {
   padding-block: 30px;
