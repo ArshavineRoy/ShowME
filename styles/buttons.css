@@ -1,4 +1,4 @@
-/*---- filter button ----*/
+/*---- filter button class ----*/
 .green-button {
   outline: none;
   cursor: pointer;
@@ -40,7 +40,7 @@
 
 .green-button::before {
   content: "";
-  background: #000;
+  background: #8c73f1;
   width: 120%;
   left: -10%;
   transform: skew(30deg);
@@ -51,8 +51,18 @@
   transform: translate3d(100%, 0, 0);
 }
 
+#filter-btn {
+  padding-inline: 47px;
+  padding-block: 9px;
+}
+
 #back {
   padding-inline: 15px;
+  padding-block: 9px;
+}
+
+#trending {
+  padding-inline: 18px;
   padding-block: 9px;
 }
 
