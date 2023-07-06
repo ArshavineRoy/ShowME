@@ -416,6 +416,16 @@ function createPagination(totalShows) {
 
     pagination.appendChild(button);
   }
+  // Add event listener to the logo to lead user to homepage
+  const logo = document.querySelector(".logo a");
+  logo.addEventListener("click", () => {
+    console.log("Logo Clicked");
+    //handleShows();
+    document.querySelector(".show-cards").innerHTML = "";
+    currentPage = 1;
+    handleShows();
+    updatePaginationButtons();
+  });
 }
 
 function updatePaginationButtons() {
