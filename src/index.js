@@ -154,29 +154,65 @@ function handleShows() {
           return false;
         };
 
-        const searchResults = data.filter(filterData);
+        let searchResults = data.filter(filterData);
 
-        // Sorting logic
+        // Filter by popularity (most popular = 7+ rating and least popular = 3 and below)
         if (sortFilter === "popular") {
           searchResults.sort((a, b) => {
-            const ratingA = a.rating && a.rating.average ? a.rating.average : 0;
-            const ratingB = b.rating && b.rating.average ? b.rating.average : 0;
+            const ratingA =
+              a.rating && a.rating.average ? parseFloat(a.rating.average) : 0;
+            const ratingB =
+              b.rating && b.rating.average ? parseFloat(b.rating.average) : 0;
             return ratingB - ratingA; // Sort in descending order of ratings
+          });
+          searchResults = searchResults.filter((show) => {
+            const showRating =
+              show.rating && show.rating.average
+                ? parseFloat(show.rating.average)
+                : 0;
+            return showRating >= 7; // Filtering shows with 7+ rating and above
           });
         } else if (sortFilter === "unpopular") {
           searchResults.sort((a, b) => {
-            const ratingA = a.rating && a.rating.average ? a.rating.average : 0;
-            const ratingB = b.rating && b.rating.average ? b.rating.average : 0;
+            const ratingA =
+              a.rating && a.rating.average ? parseFloat(a.rating.average) : 0;
+            const ratingB =
+              b.rating && b.rating.average ? parseFloat(b.rating.average) : 0;
+            return ratingA - ratingB; // Sort in ascending order of ratings
+          });
+          searchResults = searchResults.filter((show) => {
+            const showRating =
+              show.rating && show.rating.average
+                ? parseFloat(show.rating.average)
+                : 0;
+            return showRating <= 3; // Filter shows with 3 star and below rating
+          });
+        }
+        // Sorting logic by rating (highest and lowest rating)
+        if (sortFilter === "highest-rated") {
+          searchResults.sort((a, b) => {
+            const ratingA =
+              a.rating && a.rating.average ? parseFloat(a.rating.average) : 0;
+            const ratingB =
+              b.rating && b.rating.average ? parseFloat(b.rating.average) : 0;
+            return ratingB - ratingA; // Sort in descending order of ratings
+          });
+        } else if (sortFilter === "lowest-rated") {
+          searchResults.sort((a, b) => {
+            const ratingA =
+              a.rating && a.rating.average ? parseFloat(a.rating.average) : 0;
+            const ratingB =
+              b.rating && b.rating.average ? parseFloat(b.rating.average) : 0;
             return ratingA - ratingB; // Sort in ascending order of ratings
           });
         }
-
+        //creating cards for the shows based on filter criteria
         if (searchResults.length > 0) {
           let hasResults = false;
           let count = 0; // Counter for the number of cards created
 
           searchResults.forEach((show) => {
-            // Filtering shows based on status, genre, and rating through the filter button
+            // Filtering shows based on status, genre, rating, etc. through the filter button
             if (
               show.genres
                 .join(", ")
