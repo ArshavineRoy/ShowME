@@ -61,5 +61,5 @@ document.addEventListener("DOMContentLoaded", function () {
   <option value="z-to-a">Z to A</option>
 </select>
 </div>
-<button id="filter-btn"><span>Filter</span></button>`;
+<button id="filter-btn" class="green-button"><span>Filter</span></button>`;
 });

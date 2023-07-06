@@ -1,5 +1,5 @@
 /*---- filter button ----*/
-#filter-btn {
+.green-button {
   outline: none;
   cursor: pointer;
   border: none;
@@ -18,18 +18,18 @@
   color: ghostwhite;
 }
 
-#filter-btn span {
+.green-button span {
   position: relative;
   z-index: 10;
   transition: color 0.4s;
 }
 
-#filter-btn:hover span {
+.green-button:hover span {
   color: black;
 }
 
-#filter-btn::before,
-#filter-btn::after {
+.green-button::before,
+.green-button::after {
   position: absolute;
   top: 0;
   left: 0;
@@ -38,7 +38,7 @@
   z-index: 0;
 }
 
-#filter-btn::before {
+.green-button::before {
   content: "";
   background: #000;
   width: 120%;
@@ -47,8 +47,13 @@
   transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
 }
 
-#filter-btn:hover::before {
+.green-button:hover::before {
   transform: translate3d(100%, 0, 0);
+}
+
+#back {
+  padding-inline: 15px;
+  padding-block: 9px;
 }
 
 /*--- svg ---*/

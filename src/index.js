@@ -89,6 +89,7 @@ function handleShows() {
 
       imgCard.appendChild(card);
     }
+
     imgElement.addEventListener("click", () => {
       console.log("Image Clicked");
       imgCard.innerHTML = "";
@@ -112,8 +113,7 @@ function handleShows() {
       rating.classList.add("rating");
       rating.innerHTML = `
       <span class="star">&#9733;</span>
-      <span id="rating-value">${avgRating}</span>
-    `;
+      <span id="rating-value">${avgRating}</span>`;
 
       // Create a container for the title and rating
       const titleRatingContainer = document.createElement("div");
@@ -129,7 +129,8 @@ function handleShows() {
       // Create a paragraph element for the status
       const status = document.createElement("p");
       if (showStatus === "Ended") {
-        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span> <br> <br> ${summary}</p>`;
+        status.innerHTML = `<p>Premiered: ${premiered} <br> Status: <span style="color: red;">Ended on ${endDate} </span> <br> <br> ${summary}</p> <br> <p>
+        <button id="back" class="green-button"><span>Go Back</span></button> </p>`;
       } else {
         status.innerHTML = `<p>Premiered: ${premiered} <br> Status: Running </p>`;
       }
@@ -141,6 +142,16 @@ function handleShows() {
       card.appendChild(cardContent);
 
       imgCard.appendChild(card);
+
+      // Add event listener to the "Back" button to go back to the previous page
+      const backButton = document.querySelector("#back");
+      backButton.addEventListener("click", () => {
+        console.log("Back Button Clicked");
+        currentPage = 1;
+        document.querySelector(".show-cards").innerHTML = "";
+        handleShows();
+        updatePaginationButtons();
+      });
     });
   }
   const searchBtn = document.querySelector("#search-btn");
