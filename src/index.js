@@ -116,21 +116,36 @@ function handleShows() {
   function filterShows() {
     const keyword = document.querySelector("#search-input").value;
     const statusFilter = document.querySelector("#status").value;
+    const genreFilter = document.querySelector("#genre").value;
+    //const genre = show.genres.join(", ");
+
+    console.log(genreFilter);
     fetch(URL)
       .then((res) => res.json())
       .then((data) => {
         imgCard.innerHTML = "";
-        console.log(statusFilter);
-        const searchResults = data.filter((show) =>
-          show.name.toLowerCase().includes(keyword.toLowerCase())
-        );
+        //console.log(statusFilter);
+
+        const filterData = (show) => {
+          return (
+            show.name.toLowerCase().includes(keyword.toLowerCase()) ||
+            show.genres.join(", ").toLowerCase().includes(keyword.toLowerCase())
+          );
+        };
+
+        const searchResults = data.filter(filterData);
 
         if (searchResults.length > 0) {
           let hasResults = false;
           let count = 0; // Counter for the number of cards created
 
           searchResults.forEach((show) => {
+            // filtering shows based on status, genre through the filter button
             if (
+              show.genres
+                .join(", ")
+                .toLowerCase()
+                .includes(genreFilter.toLowerCase()) &&
               show.status.toLowerCase().includes(statusFilter.toLowerCase())
             ) {
               console.log("Found!");
