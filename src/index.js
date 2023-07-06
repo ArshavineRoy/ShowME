@@ -155,7 +155,7 @@ function handleShows() {
         };
 
         let searchResults = data.filter(filterData);
-        // Sorting logic
+        // alphabetical sorting logic
         if (sortFilter === "a-to-z") {
           searchResults.sort((a, b) => a.name.localeCompare(b.name));
         } else if (sortFilter === "z-to-a") {
