@@ -52,15 +52,8 @@
 }
 
 .card-content .rating {
-  margin-top: 5px;
-  display: flex;
-  align-items: center;
-  color: #00ff80; /* Rating color */
+  color: #00a151; /* Rating color */
   font-size: 18px;
-}
-
-.card-content .rating .star {
-  margin-right: 5px;
 }
 
 .card-content #rating-value {

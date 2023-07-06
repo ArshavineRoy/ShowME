@@ -113,24 +113,44 @@ function handleShows() {
         }
       });
   }
+
   function filterShows() {
     const keyword = document.querySelector("#search-input").value;
     const statusFilter = document.querySelector("#status").value;
     const genreFilter = document.querySelector("#genre").value;
-    //const genre = show.genres.join(", ");
+    const ratingFilter = document.querySelector("#rating").value;
 
-    console.log(genreFilter);
     fetch(URL)
       .then((res) => res.json())
       .then((data) => {
         imgCard.innerHTML = "";
-        //console.log(statusFilter);
 
         const filterData = (show) => {
-          return (
-            show.name.toLowerCase().includes(keyword.toLowerCase()) ||
-            show.genres.join(", ").toLowerCase().includes(keyword.toLowerCase())
-          );
+          const showRating =
+            show.rating && show.rating.average ? show.rating.average : null;
+          if (ratingFilter === "") {
+            // If no rating filter applied
+            return (
+              show.name.toLowerCase().includes(keyword.toLowerCase()) ||
+              show.genres
+                .join(", ")
+                .toLowerCase()
+                .includes(keyword.toLowerCase())
+            );
+          } else if (ratingFilter.endsWith("+")) {
+            // Rating filter n+
+            const ratingValue = parseInt(ratingFilter);
+            return (
+              (show.name.toLowerCase().includes(keyword.toLowerCase()) ||
+                show.genres
+                  .join(", ")
+                  .toLowerCase()
+                  .includes(keyword.toLowerCase())) &&
+              showRating !== null &&
+              parseFloat(showRating) >= ratingValue
+            );
+          }
+          return false;
         };
 
         const searchResults = data.filter(filterData);
@@ -140,7 +160,7 @@ function handleShows() {
           let count = 0; // Counter for the number of cards created
 
           searchResults.forEach((show) => {
-            // filtering shows based on status, genre through the filter button
+            // Filtering shows based on status, genre, and rating through the filter button
             if (
               show.genres
                 .join(", ")
@@ -148,7 +168,7 @@ function handleShows() {
                 .includes(genreFilter.toLowerCase()) &&
               show.status.toLowerCase().includes(statusFilter.toLowerCase())
             ) {
-              console.log("Found!");
+              //console.log("Found!");
               if (
                 count >= (currentPage - 1) * showsPerPage &&
                 count < currentPage * showsPerPage
