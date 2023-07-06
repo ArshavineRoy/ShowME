@@ -84,12 +84,20 @@ nav ul li a {
   text-decoration: none;
 }
 
-.popular {
+#page-title {
   padding-left: 40px;
   padding-top: 20px;
+  font-family: "open sans", sans-serif;
+  font-size: 44px;
+  font-weight: 300;
 }
 
-main {
+/* .popular {
+  padding-left: 40px;
+  padding-top: 20px;
+} */
+
+#show-content {
   padding-block: 30px;
   padding-inline: 40px;
   display: flex;
