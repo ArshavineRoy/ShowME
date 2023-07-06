@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const URL = "http://localhost:3000/shows";
+  const URL = "https://arshavineroy.github.io/ShowME/english-db.json";
   const showsPerPage = 50; // Number of shows per page
   let currentPage = 1; // Current page number
   let data = []; // Array to store the fetched data
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch(URL)
     .then((res) => res.json())
     .then((fetchedData) => {
-      data = fetchedData; // Save the fetched data in the 'data' array
+      data = fetchedData.shows; // Save the fetched data in the 'data' array
       handleShows();
       createPagination(data.length);
     });
