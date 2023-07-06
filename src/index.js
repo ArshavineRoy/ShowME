@@ -155,6 +155,12 @@ function handleShows() {
         };
 
         let searchResults = data.filter(filterData);
+        // Sorting logic
+        if (sortFilter === "a-to-z") {
+          searchResults.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sortFilter === "z-to-a") {
+          searchResults.sort((a, b) => b.name.localeCompare(a.name));
+        }
 
         // Filter by popularity (most popular = 7+ rating and least popular = 3 and below)
         if (sortFilter === "popular") {
