@@ -143,7 +143,7 @@ function handleShows() {
 
       imgCard.appendChild(card);
 
-      // Add event listener to the "Back" button to go back to the previous page
+      // Add event listener to the "Go Back" button to go back to page 1
       const backButton = document.querySelector("#back");
       backButton.addEventListener("click", () => {
         console.log("Back Button Clicked");
