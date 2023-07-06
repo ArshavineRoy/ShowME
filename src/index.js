@@ -1,5 +1,5 @@
 const URL = "http://localhost:3000/shows";
-const showsPerPage = 50; // Number of shows per page
+const showsPerPage = 30; // Number of shows per page
 let currentPage = 1; // Current page number
 let data = []; // Array to store the fetched data
 
@@ -113,6 +113,48 @@ function handleShows() {
         }
       });
   }
+  function filterShows() {
+    const keyword = document.querySelector("#search-input").value;
+    const statusFilter = document.querySelector("#status").value;
+    fetch(URL)
+      .then((res) => res.json())
+      .then((data) => {
+        imgCard.innerHTML = "";
+        console.log(statusFilter);
+        const searchResults = data.filter((show) =>
+          show.name.toLowerCase().includes(keyword.toLowerCase())
+        );
+
+        if (searchResults.length > 0) {
+          let hasResults = false;
+          let count = 0; // Counter for the number of cards created
+
+          searchResults.forEach((show) => {
+            if (
+              show.status.toLowerCase().includes(statusFilter.toLowerCase())
+            ) {
+              console.log("Found!");
+              if (
+                count >= (currentPage - 1) * showsPerPage &&
+                count < currentPage * showsPerPage
+              ) {
+                createCard(show);
+                hasResults = true;
+              }
+              count++;
+            }
+          });
+
+          if (!hasResults) {
+            imgCard.innerHTML = "<h1>No results found.</h1>";
+            console.log("No results found");
+          }
+        } else {
+          imgCard.innerHTML = "<h1>No results found.</h1>";
+          console.log("No results found");
+        }
+      });
+  }
 
   /* event listener for the "Enter" key press if the user enters a
  keyword and presses the Enter key
@@ -126,6 +168,9 @@ function handleShows() {
       fetchResults();
     }
   }
+
+  const filterBtn = document.querySelector("#filter-btn");
+  filterBtn.addEventListener("click", filterShows);
 
   function createCard(show) {
     const imgCard = document.querySelector(".show-cards");
@@ -215,7 +260,7 @@ function createPagination(totalShows) {
     }
 
     // Add event listener to handle page change
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
       currentPage = i;
       const imgCard = document.querySelector(".show-cards");
       imgCard.innerHTML = ""; // Clear existing show cards
