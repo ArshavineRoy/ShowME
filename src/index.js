@@ -237,10 +237,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // function for getting results based on keywords entered in search bar
     function fetchResults() {
       const keyword = document.querySelector("#search-input").value;
+      let data = [];
       console.log(keyword);
       fetch(URL)
         .then((res) => res.json())
-        .then((data) => {
+        .then((fetchedData) => {
+          data = fetchedData.shows;
           imgCard.innerHTML = ""; // Clear existing show cards
           const searchResults = data.filter((show) =>
             show.name.toLowerCase().includes(keyword.toLowerCase())
@@ -266,7 +268,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       fetch(URL)
         .then((res) => res.json())
-        .then((data) => {
+        .then((fetchedData) => {
+          data = fetchedData.shows;
           imgCard.innerHTML = "";
 
           const filterData = (show) => {
@@ -398,7 +401,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Trending Button Clicked");
       fetch(URL)
         .then((res) => res.json())
-        .then((data) => {
+        .then((fetchedData) => {
+          data = fetchedData.shows;
           const runningShows = data.filter((show) => show.status === "Running");
           const popularShows = runningShows.filter((show) => {
             const rating =
